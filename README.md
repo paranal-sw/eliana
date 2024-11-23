@@ -4,4 +4,4 @@ Maintainer: @jpgil / juanpablo.gil@eso.org
 
 ## License
 
-MIT revised License, see attached license file.
+BSD 3-Clause License, see attached license file.
