@@ -1,0 +1,4 @@
+setuptools
+
+# This allows to edit eliana locally
+-e .
