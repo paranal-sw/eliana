@@ -10,10 +10,21 @@ Log Tokenizer: A utility for tokenizing log messages, enabling efficient parsing
 
 Statistical Anomaly Detection: A module designed to identify anomalies in log data through statistical analysis, useful for detecting irregularities or incidents.
 
+## Install
 
+```python
+pip install eliana
+```
 
-Maintainer: @jpgil / juanpablo.gil@eso.org
-Paranal SW Group.
+## Getting Started
+
+Start at [notebooks/01-overview.ipynb](notebooks/01-overview.ipynb) in Notebooks directory.
+
+## Contribute
+
+You are welcome to test and send your comments to maintaner team:
+
+* Maintainer: @jpgil / juanpablo.gil@eso.org, Paranal SW Group.
 
 ## License
 
