@@ -1,4 +1,5 @@
 setuptools
+wheel
 
 # This allows to edit eliana locally
 -e .

@@ -1,35 +1,33 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "eliana"
 version = "0.1.0"
-description = "Event Log and Incident Analysis for Astronomy."
-requires-python = ">=3.9"
+description = "ELIANA (Event Log and Incident Analysis), a log analysis library developed at the Paranal Observatory"
+readme = "README.md"
+license = { text = "BSD License" }
 authors = [
-    {name = "Juan Pablo Gil", email = "juanpablo.gil@eso.org"}
+  { name = "Juan Pablo Gil", email = "juanpablo.gil@eso.org" }
 ]
-readme = "README.md"  # Make sure you have a README.md file in your project root
-license = {text = "BSD 3-Clause License"}
-keywords = ["astronomy", "event log", "incident analysis", "log analysis"]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: BSD License",
-    "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent"
 ]
-
+requires-python = ">=3.9"
 dependencies = [
-    "pandas",
-    "matplotlib",
-    "numpy<2",
-    "swifter",
-    "scikit-learn"
+  "pandas",
+  "matplotlib",
+  "numpy<2",
+  "swifter",
+  "scikit-learn"
 ]
-urls = { "Homepage" = "https://github.com/paranal-sw/eliana" }
 
-[tool.setuptools]
-package-dir = {"" = "eliana"}
+[project.urls]
+Homepage = "https://github.com/paranal-sw/eliana"
+Repository = "https://github.com/paranal-sw/eliana"
 
 [tool.setuptools.packages.find]
-where = ["eliana"]
+where = ["."]
