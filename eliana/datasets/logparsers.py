@@ -7,15 +7,17 @@ import re
 import pandas as pd
         
 class Log2Table:
-    """Parse a list of logs following a criteria similar to state machines.
-
-    Constructor
-    ----------
-    timestamp : str, optional. Column name for timestamp.
-    timeout : str
-    truncated_rows : bool, allow to continue parsing with missing data
+    """
+    Parse a list of events following a criteria based in state machines to fill a table with complex behavior. 
     """
     def __init__(self, **kwargs):
+        """
+        Constructor
+        ----------
+        timestamp : str, optional. Column name for timestamp.
+        timeout : str
+        truncated_rows : bool, allow to continue parsing with missing data
+        """
         self._conf = kwargs
         self._rows = {}
         self._start = {}
@@ -25,7 +27,8 @@ class Log2Table:
             pass
 
     def start_when(self, **kwargs):
-        """Declare initialization of a row
+        """
+        Declare initialization of a row
 
         Parameters
         ----------
@@ -41,7 +44,8 @@ class Log2Table:
             self._conf['fields_id'] = self._start['fields_id']
     
     def when(self, **kwargs):
-        """Template to fill a column in a row based on its content
+        """
+        Template to fill a column in a row based on its content
 
         Parameters
         ----------
@@ -68,7 +72,8 @@ class Log2Table:
 
 
     def parse(self, user_df):
-        """Iterate DataFrame or list and create rows
+        """
+        Iterate DataFrame or list and create rows previously defined
 
         Parameters
         ----------
@@ -333,7 +338,8 @@ def any_of(myList, in_col='__allfields'):
     return func
 
 class txt:
-    """Generic text with boolean
+    """
+    Generic text with boolean
     
     Usage:
         condition = _(' (red)') & ~_('ACK ABORT')
@@ -389,3 +395,6 @@ class txt:
         inverted = txt(self.substring)
         inverted.negate = not self.negate
         return inverted
+    
+# Convenient alias
+_ = txt

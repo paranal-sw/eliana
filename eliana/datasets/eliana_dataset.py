@@ -60,21 +60,25 @@ class Config:
 
 class ElianaDataset:
     """
-    Common methods for Parlogan Dataset Manipulation.
-
-    The most interesting functionality of the class is that it generates a unique cache that speeds up queries or file manipulations.
-
-    Parameters
-    ----------
-    config : dict
-        A configuration dictionary containing key-value pairs for the dataset setup.
-
-    Attributes
-    ----------
-    config : Config
-        Configuration settings including required, optional, and default values.
+    High level class for Eliana Dataset Manipulation, oriented to pandas DataFrames.
     """
+
     def __init__(self, **kwargs):
+        """
+        Common methods for Eliana Dataset Manipulation.
+
+        The most interesting functionality of the class is that it generates a unique cache that speeds up queries or file manipulations.
+
+        Parameters
+        ----------
+        config : dict
+            A configuration dictionary containing key-value pairs for the dataset setup.
+
+        Attributes
+        ----------
+        config : Config
+            Configuration settings including required, optional, and default values.
+        """
         dataset_name = kwargs.get('dataset_name', self.__class__.__name__)
 
         default_config = {
@@ -439,55 +443,61 @@ class ElasticsearchQueryDataset(ElianaDataset):
     """
     Parlogan dataset specialized in Elasticsearch queries.
 
-    Parameters
-    ----------
-    config : dict
-        A configuration dictionary containing key-value pairs for the dataset setup.
-
-    Attributes
-    ----------
-    start_timestamp : str
-        Start timestamp for the dataset instance.
-    stop_timestamp : str
-        Stop timestamp for the dataset instance.
-    trace_query : str
-        Query string for filtering traces.
-    meta_query : str
-        Query string for filtering the metadata.
-
-    Required config values
-    ----------------------
-    start_timestamp : str
-        The start timestamp for the dataset.
-    stop_timestamp : str
-        The stop timestamp for the dataset.
-
-    Optional config values
-    ----------------------
-    trace_filters : list
-        Filters to be appended to `self.trace_query`.
-
-    Default config values
-    ---------------------
-    'meta_query' : str
-        Default is ''.
-    'trace_query' : str
-        Default is ''.
-    'trace_filters' : list
-        Default is an empty list.
-
-    Methods
-    -------
-    start_timestamp
-        Getter and setter for the start timestamp.
-    stop_timestamp
-        Getter and setter for the stop timestamp.
-    add_trace_filter(filter)
-        Adds filters to the trace query.
-    filtered_trace_query(**kwargs)
-        Returns the trace query with applied filters.
+    
     """
     def __init__(self, **kwargs):
+        """
+        Main parameter: **config
+        
+        Parameters
+        ----------
+        config : dict
+            A configuration dictionary containing key-value pairs for the dataset setup.
+
+        Attributes
+        ----------
+        start_timestamp : str
+            Start timestamp for the dataset instance.
+        stop_timestamp : str
+            Stop timestamp for the dataset instance.
+        trace_query : str
+            Query string for filtering traces.
+        meta_query : str
+            Query string for filtering the metadata.
+
+        Required config values
+        ----------------------
+        start_timestamp : str
+            The start timestamp for the dataset.
+        stop_timestamp : str
+            The stop timestamp for the dataset.
+
+        Optional config values
+        ----------------------
+        trace_filters : list
+            Filters to be appended to `self.trace_query`.
+
+        Default config values
+        ---------------------
+        'meta_query' : str
+            Default is ''.
+        'trace_query' : str
+            Default is ''.
+        'trace_filters' : list
+            Default is an empty list.
+
+        Methods
+        -------
+        start_timestamp
+            Getter and setter for the start timestamp.
+        stop_timestamp
+            Getter and setter for the stop timestamp.
+        add_trace_filter(filter)
+            Adds filters to the trace query.
+        filtered_trace_query(**kwargs)
+            Returns the trace query with applied filters.
+        
+        """
         super().__init__(**kwargs)
         required_keys = ['start_timestamp', 'stop_timestamp']
         for key in required_keys:
