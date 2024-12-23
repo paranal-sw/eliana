@@ -1,0 +1,6 @@
+setuptools
+wheel
+ipywidgets>=7.4.2
+
+# This allows to edit eliana locally
+-e .

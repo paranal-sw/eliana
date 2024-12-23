@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eliana"
+version = "0.1.0"
+description = "ELIANA (Event Log and Incident Analysis), a log analysis library developed at the Paranal Observatory"
+readme = "README.md"
+license = { text = "BSD License" }
+authors = [
+  { name = "Juan Pablo Gil", email = "juanpablo.gil@eso.org" }
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent"
+]
+requires-python = ">=3.9"
+dependencies = [
+  "pandas",
+  "matplotlib",
+  "numpy<2",
+  "swifter",
+  "scikit-learn"
+]
+
+[project.urls]
+Homepage = "https://github.com/paranal-sw/eliana"
+Repository = "https://github.com/paranal-sw/eliana"
+
+[tool.setuptools.packages.find]
+where = ["."]
