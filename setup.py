@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='eliana',
-    version='0.1.1',
+    version='0.1.2',
     author='Juan Pablo Gil',
     author_email='juanpablo.gil@eso.org',
     description='ELIANA (Event Log and Incident Analysis), a log analysis library developed at the Paranal Observatory',
