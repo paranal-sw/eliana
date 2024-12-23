@@ -68,9 +68,16 @@ class ParlogsObservations(ElianaDataset):
 
         # Update defaults with provided kwargs and set attributes
         for key, default in defaults.items():
-            value = kwargs.get(key, default)
-            setattr(self, key, value)
-            setattr(self.config, key, getattr(self.config, key, value))
+            setattr(self, key, kwargs.get(key, default))
+            if getattr(self.config, key, None):
+                setattr(self, key, getattr(self.config, key))
+            else:
+                setattr(self.config, key, default)
+        # # Update defaults with provided kwargs and set attributes
+        # for key, default in defaults.items():
+        #     value = kwargs.get(key, default)
+        #     setattr(self, key, value)
+        #     setattr(self.config, key, getattr(self.config, key, value))
 
     @property
     def system(self):
