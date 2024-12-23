@@ -27,11 +27,33 @@ from .tokenizers import VltTokenizer, RegExpTokenizer
 
 
 class LogColorizer():
+    """
+    Model to learn tokenizers from a dataset of traces.
+
+    Attributes
+    ----------
+    _special : str
+        Placeholder symbol used in templates. Default is "§".
+    _wildcard : str
+        Placeholder for variable text in templates. Default is "{}".
+    _templates : list or None
+        Stores the templates created from tokenized traces.
+    """
     _special = "§"
     _wildcard = "{}"
     _templates = None
 
     def __init__(self, tokenizer=None, tokenizer_func = None) -> None:
+        """
+        Initializes the LogColorizer with a tokenizer or a custom tokenization function.
+
+        Parameters
+        ----------
+        tokenizer : object, optional
+            Tokenizer instance with a `tokenize` method.
+        tokenizer_func : callable, optional
+            Custom tokenization function.
+        """
         if tokenizer:
             # self.regexps = tokenizer.regexps if tokenizer else lambda x: x
             self._tokenizer_func = tokenizer.tokenize
@@ -49,6 +71,9 @@ class LogColorizer():
 
     @property 
     def templates(self):
+        """
+        List of templates used for matching traces.
+        """        
         return self._templates
     
     @templates.setter
@@ -58,12 +83,23 @@ class LogColorizer():
 
     @property
     def regexps(self):
+        """
+        List of regular expressions used by the tokenizer, including post-processing patterns.
+
+        Returns
+        -------
+        list of str
+            Combined list of tokenizer and post-processor regex patterns.
+        """        
         x = copy.copy(self.tokenizer_instance.regexps)
         x.append(self._post_regexp.regexps)
         return x
 
     @property
     def special(self):
+        """
+        Symbol used as a placeholder for numeric or variable values in templates. Default is '§'.
+        """
         return self._special
     
     @property
@@ -71,8 +107,19 @@ class LogColorizer():
         return self._wildcard
 
     def tokenize(self, word):
-        #logging.debug("")
-        #logging.debug(f"-- Tokenize '{txt}'")
+        """
+        Tokenizes a word or phrase using the provided tokenizer and post-processing steps.
+
+        Parameters
+        ----------
+        word : str
+            Input string to tokenize.
+
+        Returns
+        -------
+        str
+            Tokenized representation of the input.
+        """
         txt = self._tokenizer_func(word)
         txt = self._post_regexp.tokenize(f" {txt} ").strip()
         txt = self._templatize(txt)
@@ -80,6 +127,21 @@ class LogColorizer():
 
     
     def fit(self, traces, warn=False):
+        """
+        Learns templates and tokenization rules from a dataset of traces.
+
+        Parameters
+        ----------
+        traces : pandas.DataFrame
+            Dataset containing traces with 'event' and 'trace_id' columns.
+        warn : bool, optional
+            If True, logs warnings during the process. Default is False.
+
+        Returns
+        -------
+        pandas.DataFrame
+            Processed traces with added tokenized columns and metadata.
+        """        
         if isinstance(warn, bool) and warn:
             log = logging.warning
         else:
@@ -239,6 +301,19 @@ class LogColorizer():
 
 
     def _templatize(self, txt):
+        """
+        Matches a text string against known templates to standardize it.
+
+        Parameters
+        ----------
+        txt : str
+            Text to be matched against templates.
+
+        Returns
+        -------
+        str
+            Standardized text matching a template.
+        """        
         txt_pieces = txt.split()
         txt_size = len(txt_pieces)
 
@@ -292,7 +367,23 @@ class LogColorizer():
         return txt
 
     def _templatize_chunk(self, tpl_piece, txt_piece, OMMIT_TPL=False):
-        """Examples:
+        """
+        Processes a chunk of text and replaces dynamic elements with wildcards.
+
+        Parameters
+        ----------
+        tpl_piece : str
+            Template piece containing placeholders.
+        txt_piece : str
+            Text piece to be matched against the template.
+        OMMIT_TPL : bool, optional
+            Flag to omit the template if matching fails. Default is False.
+
+        Returns
+        -------
+        tuple
+            Chunk with placeholders replaced, and the updated omission flag.        
+        Examples:
         if special = §:
             f(p§f§x, prefix) = p{}f{}x
             f(p§f§x, pr123efix) = p{}f{}x

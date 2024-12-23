@@ -18,6 +18,7 @@ class AbstractTokenizer():
     """
     Main methods for tokenizers.
     """
+    
     options = SimpleNamespace()
 
     _reg_spaces = re.compile(r"(\ {2,}|\t+)")
@@ -34,6 +35,9 @@ class AbstractTokenizer():
                 setattr(self.options, k, kwargs[k])
 
     def normalize(self, txt):
+        """
+        Applies option normalization to the input text.
+        """
         if self.options.to_lowercase:
             txt = txt.lower()
         if self.options.remove_extra_spaces:
@@ -78,9 +82,16 @@ class AbstractTokenizer():
         return "\n".join([line.strip() for line in help_text])    
 
 class RegExpTokenizer(AbstractTokenizer):
+    """    A tokenizer that uses regular expressions to tokenize text. Inherits from AbstractTokenizer. """
     my_regexps = []
 
     def __init__(self, **kwargs) -> None:
+        """
+        Initializes the RegExpTokenizer with optional keyword arguments.
+        
+        kwargs : dict
+            Optional keyword arguments to initialize the tokenizer.
+        """
         AbstractTokenizer.__init__(self, **kwargs)
 
         self.regexps = []
