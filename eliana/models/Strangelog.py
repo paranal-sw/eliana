@@ -38,7 +38,10 @@ class Strangelog():
 
     # TODO: docstring
     def fit(self, meta, traces, warn=False):
-        """Instructions
+        """
+        Train the model with the given traces and metadata.
+        
+        Instructions
         meta must be filtered to normal cases, without errors or aborts. This way the model will learn the nornmal behavior and 
         will detect outliers based on deviations of this normality.
         """
