@@ -16,3 +16,11 @@ pip install -r requirements.txt
 ## Unit tests
 
 TODO, for now.
+
+# Build and PyPI
+
+# Build the distribution packages
+python -m build
+
+# Upload to PyPI
+twine upload dist/*
