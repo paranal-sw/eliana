@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "eliana"
-version = "0.1.2"
+version = "0.1.3"
 description = "ELIANA (Event Log and Incident Analysis), a log analysis library developed at the Paranal Observatory"
 readme = "README.md"
 license = { text = "BSD License" }
@@ -30,4 +30,5 @@ Homepage = "https://github.com/paranal-sw/eliana"
 Repository = "https://github.com/paranal-sw/eliana"
 
 [tool.setuptools.packages.find]
-where = ["eliana"]
+where = ["src"]
+namespaces = true
