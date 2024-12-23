@@ -22,7 +22,9 @@ setup(
         'matplotlib',
         'numpy<2',
         'swifter',
-        'scikit-learn'
+        'scikit-learn',
+        'pyarrow',
+        'fastparquet',
     ],
     include_package_data=True,
     zip_safe=False,  # Recommended for namespace packages

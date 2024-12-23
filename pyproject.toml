@@ -22,7 +22,9 @@ dependencies = [
   "matplotlib",
   "numpy<2",
   "swifter",
-  "scikit-learn"
+  "scikit-learn",
+  "pyarrow",
+  "fastparquet",
 ]
 
 [project.urls]
