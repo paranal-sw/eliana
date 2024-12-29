@@ -12,8 +12,6 @@ setup(
     url='https://github.com/paranal-sw/eliana',
     packages=find_namespace_packages(where='src'),
     package_dir={'': 'src'},
-    packages=find_namespace_packages(where='src'),
-    package_dir={'': 'src'},
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: BSD License',  # Updated to BSD License
