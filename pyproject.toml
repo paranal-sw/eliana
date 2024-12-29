@@ -33,3 +33,5 @@ Repository = "https://github.com/paranal-sw/eliana"
 [tool.setuptools.packages.find]
 where = ["src"]
 namespaces = true
+where = ["src"]
+namespaces = true

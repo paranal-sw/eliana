@@ -1,4 +1,5 @@
 from setuptools import setup, find_namespace_packages
+from setuptools import setup, find_namespace_packages
 
 setup(
     name='eliana',
@@ -9,6 +10,8 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/paranal-sw/eliana',
+    packages=find_namespace_packages(where='src'),
+    package_dir={'': 'src'},
     packages=find_namespace_packages(where='src'),
     package_dir={'': 'src'},
     classifiers=[
