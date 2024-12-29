@@ -1,5 +1,4 @@
 import numpy as np
-import swifter
 from sklearn.cluster import DBSCAN
 import logging
 from collections import Counter
@@ -18,7 +17,7 @@ def optimized_tkn(df, tknClass, column='logtext', warn=False):
     log("### Step 1: Basic tokenization")
 
     tkn=tknClass()
-    df['tkn_simple'] = df[column].swifter.apply(tkn.tokenize)
+    df['tkn_simple'] = df[column].apply(tkn.tokenize)
 
     log( f"There are {len(df)} event logs in the trace" )
 

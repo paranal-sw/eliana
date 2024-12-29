@@ -1,5 +1,6 @@
 setuptools
-wheel
+build
+twine
 ipywidgets>=7.4.2
 
 # This allows to edit eliana locally

@@ -6,8 +6,9 @@ To develop ELIANA do the usual stuff:
 
 ```bash
 git clone https://github.com/paranal-sw/eliana
-git checkout devel
 cd eliana
+
+git checkout devel
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt 
