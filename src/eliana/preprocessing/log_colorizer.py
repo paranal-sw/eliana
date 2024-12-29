@@ -12,13 +12,6 @@ import logging
 import copy
 import traceback
 from types import SimpleNamespace
-import swifter
-# swifter.set_defaults(
-#     npartitions=8,  #Default: 2*cpu_count()
-#     progress_bar=True,
-#     allow_dask_on_strings=True,
-#     force_parallel=False,
-# )
 import pandas as pd
 from collections import Counter
 import numpy as np
@@ -154,7 +147,6 @@ class LogColorizer():
 
         events = traces.copy()#[['event']].copy()
         events['pass_1'] = events['event'].apply( self._tokenizer_func )
-        # events['pass_1'] = events['event'].swifter.allow_dask_on_strings(enable=True).apply( self._tokenizer_func )
         log(f"Pass 1/4: -- Done! {_evaluate(events['event'], events['pass_1'])}")
 
 
@@ -178,7 +170,6 @@ class LogColorizer():
             self._post_regexp.add_regexp( f" {raw_pattern} ", r" " + pattern.replace(self.special, "{}") + r" " )
 
         events['pass_2'] = events['event'].apply( self.tokenize )
-        # events['pass_2'] = events['event'].swifter.allow_dask_on_strings(enable=True).apply( self.tokenize )
         log(f"Pass 2/4: -- Done! {_evaluate(events['event'], events['pass_2'])}")
         
 
@@ -201,7 +192,6 @@ class LogColorizer():
             raw_pattern = re.escape(pattern).replace(self.special, "[0-9]+")
             self._post_regexp.add_regexp( f" {raw_pattern} ", r" " + pattern.replace(self.special, self.wildcard) + r" " )
         events['pass_3'] = events['event'].apply( self.tokenize )
-        # events['pass_3'] = events['event'].swifter.allow_dask_on_strings(enable=True).apply( self.tokenize )
         log(f"Pass 3/4: -- Done! {_evaluate(events['event'], events['pass_3'])}")
 
 
@@ -277,7 +267,6 @@ class LogColorizer():
         self.templates = new_templates
 
         events['pass_4'] = events['event'].apply( self.tokenize )
-        # events['pass_4'] = events['event'].swifter.allow_dask_on_strings(enable=True).apply( self.tokenize )
         stats = _evaluate(events['event'], events['pass_4'])
         log(f"Pass 4/4: Done! { stats }")
 

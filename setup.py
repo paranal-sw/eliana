@@ -2,7 +2,7 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='eliana',
-    version='0.1.4',
+    version='0.1.6',
     author='Juan Pablo Gil',
     author_email='juanpablo.gil@eso.org',
     description='ELIANA (Event Log and Incident Analysis), a log analysis library developed at the Paranal Observatory',
@@ -20,8 +20,7 @@ setup(
     install_requires=[
         'pandas',
         'matplotlib',
-        'numpy<2',
-        'swifter',
+        'numpy',
         'scikit-learn',
         'pyarrow',
         'fastparquet',

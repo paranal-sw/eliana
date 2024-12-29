@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "eliana"
-version = "0.1.4"
+version = "0.1.6"
 description = "ELIANA (Event Log and Incident Analysis), a log analysis library developed at the Paranal Observatory"
 readme = "README.md"
 license = { text = "BSD License" }
@@ -20,8 +20,7 @@ requires-python = ">=3.9"
 dependencies = [
   "pandas",
   "matplotlib",
-  "numpy<2",
-  "swifter",
+  "numpy",
   "scikit-learn",
   "pyarrow",
   "fastparquet",
