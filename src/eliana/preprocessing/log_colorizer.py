@@ -11,6 +11,7 @@ import pickle
 import logging
 import copy
 import traceback
+import os
 from types import SimpleNamespace
 import pandas as pd
 from collections import Counter
@@ -25,11 +26,11 @@ class LogColorizer():
 
     Attributes
     ----------
-    _special : str
+    special : str
         Placeholder symbol used in templates. Default is "§".
-    _wildcard : str
+    wildcard : str
         Placeholder for variable text in templates. Default is "{}".
-    _templates : list or None
+    templates : list or None
         Stores the templates created from tokenized traces.
     """
     _special = "§"
@@ -97,6 +98,9 @@ class LogColorizer():
     
     @property
     def wildcard(self):
+        """
+        Placeholder for variable text in templates. Default is "{}".
+        """
         return self._wildcard
 
     def tokenize(self, word):
@@ -414,7 +418,7 @@ class LogColorizer():
 
         return chunk, OMMIT_TPL
 
-    def save(self, path):
+    def save(self, path, makedirs=True):
         """
         Saves the tokenizer object to a file.
 
@@ -422,7 +426,11 @@ class LogColorizer():
         ----------
         path : str
             Path to save the tokenizer object.
-        """        
+        makedirs : bool, optional
+            If True, creates the directory structure if it does not exist. Default is True.
+        """
+        if makedirs:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, 'wb') as f:
             pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
     def fit_on_traces(self, traces):
