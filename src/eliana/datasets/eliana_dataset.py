@@ -329,11 +329,13 @@ class ElianaDataset:
             row = meta_to_use.loc[idx]
             df = self.do_query_trace(row)
 
+        if df.empty:
+            return df
+
         if event_cols:
             df['event'] = df[event_cols].apply(lambda x: ' '.join(x.dropna()), axis=1)
 
         if cols:
-            # print(cols)
             df = df[cols]
 
         return df
@@ -413,7 +415,7 @@ class ElianaDataset:
 
     def preload_traces(self):
         """
-        Preloads traces for faster access.
+        Preloads traces for faster access. (not implemented)
 
         Loads traces in chunks to provide a progress indicator.
 
