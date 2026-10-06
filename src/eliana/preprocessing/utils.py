@@ -1,11 +1,12 @@
-from collections import Counter
 import random
-import pandas as pd
-import numpy as np
+from collections import Counter
+
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 from matplotlib.ticker import FuncFormatter
 
-from .tokenizers import Numbers, UTCdate, load_tokenizer
+from .tokenizers import Numbers, UTCdate, load_tokenizer  # noqa: F401
 
 # Set the warning mode to 'None' to suppress the warning SettingWithCopyWarning
 pd.options.mode.chained_assignment = None

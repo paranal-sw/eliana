@@ -26,6 +26,11 @@ dependencies = [
   "fastparquet",
 ]
 
+[project.optional-dependencies]
+dev = [
+  "ruff",
+]
+
 [project.urls]
 Homepage = "https://github.com/paranal-sw/eliana"
 Repository = "https://github.com/paranal-sw/eliana"
@@ -33,3 +38,17 @@ Repository = "https://github.com/paranal-sw/eliana"
 [tool.setuptools.packages.find]
 where = ["src"]
 namespaces = true
+
+[tool.ruff]
+# Target Python version matching the project requirements
+target-version = "py38"
+
+[tool.ruff.lint]
+# Enable pycodestyle (E), Pyflakes (F), and isort (I) rules
+select = ["E", "F", "I"]
+
+# Never enforce line length violations (since this is an existing codebase)
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403"]

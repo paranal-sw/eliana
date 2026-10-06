@@ -1,17 +1,19 @@
-import numpy as np
-from sklearn.cluster import DBSCAN
 import logging
 from collections import Counter
 
-from .utils import get_logvocab
+import numpy as np
+from sklearn.cluster import DBSCAN
 
+from .utils import get_logvocab
 
 
 def optimized_tkn(df, tknClass, column='logtext', warn=False):
     if isinstance(warn, bool) and warn:
         log = logging.warning
     else:
-        log = lambda x: x
+        def log(x):
+            pass
+
 
 
     log("### Step 1: Basic tokenization")
@@ -74,7 +76,7 @@ def optimized_tkn(df, tknClass, column='logtext', warn=False):
         # Fit the model to the data and obtain cluster labels
         labels = dbscan.fit_predict(X)
 
-        M['labels'] = dbscan.labels_
+        M['labels'] = labels
 
         # Length of every Label
         lenL = { label: len(M[M['labels'] == label]) for label in dbscan.labels_ }

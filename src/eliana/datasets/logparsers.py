@@ -4,8 +4,10 @@ Log Parsers Utilities
 """
 import logging
 import re
+
 import pandas as pd
-        
+
+
 class Log2Table:
     """
     Parse a list of events following a criteria based in state machines to fill a table with complex behavior. 
@@ -117,11 +119,7 @@ class Log2Table:
         self._previous_log = False
         since_previous_log = False
 
-        ts = False
         for i, log in df.iterrows():
-
-            if 'timestamp' in self._conf:
-                ts = log[self._conf['timestamp']]
 
             # Concatenate elements in a simple str
             log['__allfields'] = ' '.join( [ f'{k}: {v}' for k, v in log.items() ] )
@@ -135,6 +133,7 @@ class Log2Table:
                 # TODO: in_col
                 # has_passed enough time since previous, force new row creation
                 if since_previous_log and self._has_passed_enough_time(log):
+                    name = self._name(self._previous_log)
                     logging.debug(f'-- END Row: {name}')
 
                     if 'timestamp' in self._conf:
@@ -172,8 +171,9 @@ class Log2Table:
                                 value = self._parseLogFunc(log, colvalue)
                                 # Do not allow empty!
                                 if value != "":
-                                    if when['overwrite'] or self._rows[name][colname]==None:
+                                    if when['overwrite'] or self._rows[name][colname] is None:
                                         self._rows[name][colname] = value
+
                                         # logging.warning(f"{name} -- colname={colname} = {value}")
                                     # else:
                                     #     logging.warning(f"{name} -- colname={colname} X : {when['overwrite']} or {self._rows[name][colname]}==None")
@@ -264,7 +264,7 @@ class Log2Table:
 
 
     def _parseLogFunc(self, log, func):
-        if func==None or type(func) in [str, int, bool, float]:
+        if func is None or type(func) in [str, int, bool, float]:
             return func
         else:
             return func(log)
@@ -279,7 +279,7 @@ class Log2Table:
     def _receive_event(self, real, expected, in_col='__allfields'):
         """Check if s against the template
         """        
-        if type(expected) == str:
+        if isinstance(expected, str):
             return expected in real[in_col]
         else:
             result = expected(real[in_col])
@@ -312,7 +312,7 @@ def get_word_after(txt, in_col='__allfields', delimiter=' '):
     return func
 
 def get_first_word(in_col='__allfields', delimiter=' '):
-    nonalpha = re.compile('\W')
+    nonalpha = re.compile(r'\W')
     def func(x):
         if hasattr(x, 'keys') and in_col in x:
             return func(x[in_col])       
@@ -321,7 +321,7 @@ def get_first_word(in_col='__allfields', delimiter=' '):
             try:
                 # Remove symbols
                 return items[0]
-            except:
+            except Exception:
                 return ''
     return func
 

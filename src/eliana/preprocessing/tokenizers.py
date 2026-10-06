@@ -1,6 +1,7 @@
-import re
 import pickle
+import re
 from types import SimpleNamespace
+
 
 def load_tokenizer(path):
     with open(path, 'rb') as f:
@@ -10,9 +11,6 @@ def load_tokenizer(path):
     return newColor
 
 
-import re
-import pickle
-from types import SimpleNamespace
 
 class AbstractTokenizer():
     """
