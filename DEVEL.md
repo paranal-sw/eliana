@@ -18,6 +18,27 @@ pip install -r requirements.txt
 
 TODO, for now.
 
+## Linting
+
+To install the development dependencies (including Ruff) in your virtual environment:
+
+```bash
+pip install -e .[dev]
+```
+
+To run the linter:
+
+```bash
+ruff check src/
+```
+
+To automatically fix auto-fixable lint errors:
+
+```bash
+ruff check --fix src/
+```
+
+
 # Build and PyPI
 
 # Build the distribution packages

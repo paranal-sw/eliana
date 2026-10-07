@@ -1,8 +1,10 @@
 import logging
 import pickle
 from collections import Counter
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+
 
 def load_model(path):
     with open(path, 'rb') as f:
@@ -48,7 +50,9 @@ class Strangelog():
         if isinstance(warn, bool) and warn:
             log = logging.warning
         else:
-            log = lambda x: x
+            def log(x):
+                pass
+
 
         if isinstance(meta, pd.DataFrame): 
             self.meta_ = meta.copy()  

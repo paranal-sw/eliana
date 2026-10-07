@@ -6,18 +6,20 @@ References
 Normalizer : clean up text. 
 
 """
-import re
-import pickle
-import logging
 import copy
-import traceback
+import logging
 import os
-from types import SimpleNamespace
-import pandas as pd
+import pickle
+import re
+import traceback
 from collections import Counter
+from types import SimpleNamespace  # noqa: F401
+
 import numpy as np
+import pandas as pd
 from sklearn.cluster import DBSCAN
-from .tokenizers import VltTokenizer, RegExpTokenizer
+
+from .tokenizers import RegExpTokenizer, VltTokenizer
 
 
 class LogColorizer():
@@ -142,7 +144,9 @@ class LogColorizer():
         if isinstance(warn, bool) and warn:
             log = logging.warning
         else:
-            log = lambda x: x
+            def log(x):
+                pass
+
         self._post_regexp = RegExpTokenizer()
 
         log(f"Unique colors with no tokenization = {len(set(traces['event']))}")
@@ -384,9 +388,9 @@ class LogColorizer():
         #logging.debug("Templatizing chunk")
         tpl_piece += " "
         txt_piece += " "
-        I = len(tpl_piece)
         i = 0
         chunk = ""
+
         SKIP_CHAR = False
         FLAG_TO_UNSKIP = None
 

@@ -1,7 +1,8 @@
-import os
 import base64
 import hashlib
 import logging
+import os
+
 import pandas as pd
 
 # Suppress the SettingWithCopyWarning (use with caution)
@@ -387,7 +388,9 @@ class ElianaDataset:
         if isinstance(warn, bool) and warn:
             log = logging.warning
         else:
-            log = lambda x: x
+            def log(x):
+                pass
+
 
         if not use_cache:
             use_cache = self.config.use_cache

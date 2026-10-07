@@ -1,8 +1,11 @@
 import logging
-from urllib.request import urlretrieve
 import os
+from urllib.request import urlretrieve
+
 import pandas as pd
+
 from eliana.datasets import ElianaDataset
+
 
 def _repopulate_config_and_allowed(allowed_values):
     def decorator(func):
